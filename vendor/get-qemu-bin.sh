@@ -15,7 +15,7 @@ rm -r "$DEST" || true
 
 # Clone the resin patcher
 cd "$(mktemp -d)"
-git clone --depth 1 https://github.com/resin-io-projects/armv7hf-debian-qemu.git
+git clone --depth 1 https://github.com/balena-io-library/armv7hf-debian-qemu.git
 cd armv7hf-debian-qemu
 
 # Clean out the stuff we're about to build, then copy over the rest
@@ -34,10 +34,10 @@ cp resin-xbuild "$DEST"
 # Get qemu
 case "$TARGET" in
     "arm64")
-        curl -L https://github.com/resin-io/qemu/releases/download/v2.9.0%2Bresin1/qemu-2.9.0.resin1-aarch64.tar.gz | tar xzf -
+        curl -L https://github.com/balena-io/qemu/releases/download/v2.9.0%2Bresin1/qemu-2.9.0.resin1-aarch64.tar.gz | tar xzf -
         ;;
     "arm")
-        curl -L https://github.com/resin-io/qemu/releases/download/v2.9.0%2Bresin1/qemu-2.9.0.resin1-arm.tar.gz | tar xzf -
+        curl -L https://github.com/balena-io/qemu/releases/download/v2.9.0%2Bresin1/qemu-2.9.0.resin1-arm.tar.gz | tar xzf -
         ;;
     *)
         echo "Unknown target $TARGET"
