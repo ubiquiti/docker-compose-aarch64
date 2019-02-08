@@ -9,7 +9,7 @@ COPY ./vendor/qemu-bin /usr/bin/
 RUN [ "cross-build-start" ]
 
 # Set the versions
-ENV DOCKER_COMPOSE_VER 1.22.0
+ENV DOCKER_COMPOSE_VER 1.24.0-rc1
 # docker-compose requires pyinstaller 3.3.1 (check github.com/docker/compose/requirements-build.txt)
 # If this changes, you may need to modify the version of "six" below
 ENV PYINSTALLER_VER 3.3.1
@@ -18,6 +18,7 @@ ENV SIX_VER 1.11.0
 
 # Install dependencies
 # RUN apt-get update && apt-get install -y
+RUN pip install --upgrade pip
 RUN pip install six==$SIX_VER
 
 # Compile the pyinstaller "bootloader"
@@ -34,7 +35,7 @@ RUN git clone https://github.com/docker/compose.git . \
 
 # Run the build steps (taken from github.com/docker/compose/script/build/linux-entrypoint)
 RUN mkdir ./dist \
-    && pip install -q -r requirements.txt -r requirements-build.txt \
+    && pip install -r requirements.txt -r requirements-build.txt \
     && ./script/build/write-git-sha \
     && pyinstaller docker-compose.spec \
     && mv dist/docker-compose ./docker-compose-$(uname -s)-$(uname -m)
